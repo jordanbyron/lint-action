@@ -9,6 +9,7 @@ const {
 const prOpenEvent = require("./events/pull-request-open.json");
 const prSyncEvent = require("./events/pull-request-sync.json");
 const pushEvent = require("./events/push.json");
+const mergeGroupEvent = require("./events/merge_group.json");
 const {
 	BRANCH,
 	EVENT_NAME,
@@ -94,6 +95,10 @@ describe("parseBranch()", () => {
 	test('works with "pull_request" event', () => {
 		expect(parseBranch("pull_request", prOpenEvent)).toEqual(BRANCH);
 		expect(parseBranch("pull_request", prSyncEvent)).toEqual(BRANCH);
+	});
+
+	test('works with "merge_group" event', () => {
+		expect(parseBranch("merge_group", mergeGroupEvent)).toEqual(BRANCH);
 	});
 
 	test("throws error for unsupported event", () => {
