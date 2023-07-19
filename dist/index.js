@@ -6789,6 +6789,9 @@ function parseBranch(eventName, event) {
 	if (eventName === "pull_request" || eventName === "pull_request_target") {
 		return event.pull_request.head.ref;
 	}
+	if (eventName === "merge_group") {
+		return event.merge_group.head_ref.substring(11); // Remove "refs/heads/" from start of string
+	}
 	throw Error(`${actionName} does not support "${eventName}" GitHub events`);
 }
 
